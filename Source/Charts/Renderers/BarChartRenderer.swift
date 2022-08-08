@@ -40,7 +40,7 @@ open class BarChartRenderer: BarLineScatterCandleBubbleRenderer
     /// The ````internal```` specifier is to allow subclasses (HorizontalBar) to populate the same array
     internal lazy var accessibilityOrderedElements: [[NSUIAccessibilityElement]] = accessibilityCreateEmptyOrderedElements()
     
-    public let barCornerRadius = CGFloat(6.0)
+    public var barCornerRadius = CGFloat(6.0)
 
     private class Buffer
     {
