@@ -752,7 +752,8 @@ open class BarLineChartViewBase: ChartViewBase, BarLineScatterCandleBubbleChartD
             }
             else if isHighlightPerDragEnabled
             {
-                let h = getHighlightByTouchPoint(recognizer.location(in: self))
+                let point = getNewPointLocationBasedOnMargin(point: recognizer.location(in: self), horizontalMargin: 24)
+                let h = getHighlightByTouchPoint(point)
                 
                 let lastHighlighted = self.lastHighlighted
                 
@@ -828,6 +829,29 @@ open class BarLineChartViewBase: ChartViewBase, BarLineScatterCandleBubbleChartD
         return isAnyAxisInverted &&
             _closestDataSetToTouch !== nil &&
             getAxis(_closestDataSetToTouch.axisDependency).isInverted
+    }
+    
+    private func getNewPointLocationBasedOnMargin(point: CGPoint, horizontalMargin: CGFloat) -> CGPoint {
+        var newPoint = point
+        
+        let middlePoint = self.frame.width / 2
+        let max = middlePoint - horizontalMargin
+        
+        var newX = point.x
+        
+        if newX > middlePoint {
+            let diff = newX - middlePoint
+            let offset = horizontalMargin * (diff/max)
+            newX += offset
+        } else if newX < middlePoint {
+            let diff = middlePoint - newX
+            let offset = horizontalMargin * (diff/max)
+            newX -= offset
+        }
+        
+        newPoint.x = newX
+        
+        return newPoint
     }
     
     @objc open func stopDeceleration()
