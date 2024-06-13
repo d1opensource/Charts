@@ -25,6 +25,8 @@ open class BarChartDataEntry: ChartDataEntry
     /// the sum of all positive values this entry (if stacked) contains
     private var _positiveSum: Double = 0.0
     
+    open var minY: Double? = nil
+    
     public required init()
     {
         super.init()
@@ -34,6 +36,12 @@ open class BarChartDataEntry: ChartDataEntry
     public override init(x: Double, y: Double)
     {
         super.init(x: x, y: y)
+    }
+    
+    /// Constructor for waterfall charts
+    public init(x: Double, y: Double, minY: Double) {
+        super.init(x: x, y: y)
+        self.minY = minY
     }
     
     /// Constructor for normal bars (not stacked).

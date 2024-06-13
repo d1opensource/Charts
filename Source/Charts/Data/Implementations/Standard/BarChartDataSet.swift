@@ -87,9 +87,9 @@ open class BarChartDataSet: BarLineScatterCandleBubbleChartDataSet, IBarChartDat
         {
             if e.yValues == nil
             {
-                if e.y < _yMin
+                if (e.minY ?? e.y) < _yMin
                 {
-                    _yMin = e.y
+                    _yMin = (e.minY ?? e.y)
                 }
                 
                 if e.y > _yMax
