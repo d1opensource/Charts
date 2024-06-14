@@ -130,7 +130,7 @@ open class BarChartRenderer: BarLineScatterCandleBubbleRenderer
                     : (y >= 0.0 ? CGFloat(y) : 0)
                 var bottom = isInverted
                     ? (y >= 0.0 ? CGFloat(y) : 0)
-                    : (y <= 0.0 ? CGFloat(y) : 0)
+                    : (y <= 0.0 ? CGFloat(y) : CGFloat(e.minY ?? 0))
                 
                 /* When drawing each bar, the renderer actually draws each bar from 0 to the required value.
                  * This drawn bar is then clipped to the visible chart rect in BarLineChartViewBase's draw(rect:) using clipDataToContent.
@@ -810,7 +810,7 @@ open class BarChartRenderer: BarLineScatterCandleBubbleRenderer
                 else
                 {
                     y1 = e.y
-                    y2 = 0.0
+                    y2 = e.minY ?? 0.0
                 }
                 
                 prepareBarHighlight(x: e.x, y1: y1, y2: y2, barWidthHalf: barData.barWidth / 2.0, trans: trans, rect: &barRect)
