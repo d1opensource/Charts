@@ -3,13 +3,13 @@
 import PackageDescription
 
 let package = Package(
-    name: "Charts",
+    name: "DGCharts",
     products: [
-        .library(name: "Charts", type: .dynamic, targets: ["Charts"])
+        .library(name: "DGCharts", type: .dynamic, targets: ["DGCharts"])
     ],
     dependencies: [],
     targets: [
-        .target(name: "Charts", dependencies: [])
+        .target(name: "DGCharts", dependencies: [], path: "Source/Charts")
     ],
-    swiftLanguageVersions: [4]
+    swiftLanguageVersions: [5]
 )
